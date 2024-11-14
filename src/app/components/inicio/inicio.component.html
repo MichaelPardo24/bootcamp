@@ -1,0 +1,19 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4">Nuestras campanas de Publicidad</h2>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let campana of campanas">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ campana.titulo }}</h5>
+                    <p class="card-text">{{ campana.descripcion }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Destino:</strong> {{ campana.destino }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

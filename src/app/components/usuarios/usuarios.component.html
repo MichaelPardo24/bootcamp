@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Lista de Usuarios</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Registrar Nuevo Usuario</h3>
+    <form (ngSubmit)="crearUsuario()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="nuevoUsuario.nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="nuevoUsuario.email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" [(ngModel)]="nuevoUsuario.password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+    </form>
+</div>

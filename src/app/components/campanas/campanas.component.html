@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Lista de Campañas</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Destino</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let campana of campanas">
+                <td>{{ campana.id }}</td>
+                <td>{{ campana.titulo }}</td>
+                <td>{{ campana.descripcion }}</td>
+                <td>{{ campana.destino }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Crear Nueva Campaña</h3>
+    <form (ngSubmit)="crearCampana()">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" [(ngModel)]="nuevaCampana.titulo" name="titulo" required>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" [(ngModel)]="nuevaCampana.descripcion" name="descripcion" required>
+        </div>
+        <div class="mb-3">
+            <label for="destino" class="form-label">Destino</label>
+            <input type="text" class="form-control" [(ngModel)]="nuevaCampana.destino" name="destino" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Campaña</button>
+    </form>
+</div>

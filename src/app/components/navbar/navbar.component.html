@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/inicio">
+            <i class="fas fa-globe"></i> Marketing Turistico
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/sobre_nosotros">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/contactenos">Contáctenos</a>
+                </li>
+                <!-- Mostrar estas secciones solo si el usuario está logueado -->
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/campanas">Campañas</a>
+                </li>
+                <!-- Botón de cierre de sesión -->
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <button class="btn btn-danger ms-2" (click)="logout()">Cerrar sesión</button>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn()==false">
+                    <button class="btn btn-primary ms-2" (click)="logout()">Iniciar sesion</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
