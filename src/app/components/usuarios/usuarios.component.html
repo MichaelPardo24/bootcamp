@@ -6,13 +6,26 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let usuario of usuarios">
                 <td>{{ usuario.id }}</td>
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.email }}</td>
+                <td>
+                    <input *ngIf="usuarioSeleccionado.id === usuario.id" [(ngModel)]="usuarioSeleccionado.nombre" />
+                    <span *ngIf="usuarioSeleccionado.id !== usuario.id">{{ usuario.nombre }}</span>
+                </td>
+                <td>
+                    <input *ngIf="usuarioSeleccionado.id === usuario.id" [(ngModel)]="usuarioSeleccionado.email" />
+                    <span *ngIf="usuarioSeleccionado.id !== usuario.id">{{ usuario.email }}</span>
+                </td>
+                <td>
+                    <button class="btn btn-warning m-2" (click)="seleccionarUsuario(usuario)">Editar</button>
+                    <button *ngIf="usuarioSeleccionado.id === usuario.id" class="btn btn-success m-2"
+                        (click)="actualizarUsuario(usuarioSeleccionado)">Guardar</button>
+                    <button class="btn btn-danger m-2" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -28,9 +41,9 @@
             <input type="email" class="form-control" [(ngModel)]="nuevoUsuario.email" name="email" required>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" [(ngModel)]="nuevoUsuario.password" name="password" required>
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" [(ngModel)]="nuevoUsuario.password" name="contrasena" required>
         </div>
-        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
     </form>
 </div>

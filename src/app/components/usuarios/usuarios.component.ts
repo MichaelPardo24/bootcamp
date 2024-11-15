@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -9,31 +11,44 @@ import { ApiService } from '../../services/api.service';
 export class UsuariosComponent implements OnInit {
   usuarios: any[] = [];
   nuevoUsuario = { nombre: '', email: '', password: '' };
+  usuarioSeleccionado: any = { id: null, nombre: '', email: '' };
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
-    // Obtener los usuarios existentes
+    this.obtenerUsuarios();
+  }
+
+  obtenerUsuarios() {
     this.apiService.getUsuarios().subscribe(data => {
       this.usuarios = data;
     });
   }
 
-  // Función para crear un nuevo usuario
   crearUsuario() {
     this.apiService.registrarUsuario(this.nuevoUsuario).subscribe(response => {
-      console.log('Respuesta:', response);
-
-      if (response && response.mensaje) {
-        alert(response.mensaje);  // Mostrar el mensaje de respuesta
-      } else {
-        alert('Error al crear el usuario');
-      }
-
-      // Volver a obtener la lista de usuarios después de agregar uno nuevo
-      this.apiService.getUsuarios().subscribe(data => {
-        this.usuarios = data;
-      });
+      alert(response.mensaje);
+      this.obtenerUsuarios();
     });
+  }
+
+  actualizarUsuario(usuario: any) {
+    this.apiService.actualizarUsuario(usuario.id, { nombre: usuario.nombre, email: usuario.email }).subscribe(response => {
+      alert(response.mensaje);
+      this.obtenerUsuarios();
+    });
+  }
+
+  eliminarUsuario(id: number) {
+    this.apiService.eliminarUsuario(id).subscribe(response => {
+      alert(response.mensaje);
+      this.obtenerUsuarios();
+    });
+  }
+
+  seleccionarUsuario(usuario: any) {
+    this.usuarioSeleccionado = { ...usuario };
   }
 }

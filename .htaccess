@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Si es una solicitud OPTIONS (preflight), responde con 200 OK
+    header('HTTP/1.1 200 OK');
+    exit;
+}
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "POST, GET, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} ^(PUT|DELETE)
+    RewriteRule .* - [E=HTTP_METHOD:%{REQUEST_METHOD}]
+</IfModule>

@@ -29,4 +29,12 @@ export class ApiService {
   getCampanas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/campanas_list.php`);  // Llamamos al nuevo archivo PHP para obtener campañas
   }
+
+  actualizarUsuario(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/registro.php`, { id, ...data });
+  }
+
+  eliminarUsuario(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/registro.php`, { body: { id } });
+  }
 }

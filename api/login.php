@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Permitir métodos HTTP específicos (GET, POST, PUT, DELETE, etc.)
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 // Verifica si es una solicitud OPTIONS (solicitud preflight) y termina allí si es necesario
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
